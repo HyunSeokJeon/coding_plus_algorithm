@@ -77,3 +77,19 @@ print(int('3'))
 # 유연한 형변환이 가능하다는것이 파이썬의 장점!
 print(complex(False))
 
+y = 100
+y *= 100
+
+print(y)
+
+# 수치 연산함수
+# https://docs.python.org/3/library/math.html
+
+print(abs(-7))
+n, m = divmod(100, 8)
+print(n, m)
+
+import math
+
+print(math.ceil(5.1))
+print(math.floor(3.874))
