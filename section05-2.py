@@ -93,6 +93,17 @@ else:
 
 # continue
 
+lt = ['1', 2, 5, True, 4.3, complex(4)]
+
+for v in lt:
+    if type(v) == float:
+        continue
+    print('타입: ', type(v))
+
+name = 'Niceman'
+print(list(reversed(name)))
+print(tuple(reversed(name)))
+
 
 
 
