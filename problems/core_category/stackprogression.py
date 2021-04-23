@@ -5,28 +5,40 @@
 # for aa in range(n):
 #     nlist.append(int(input()))
 # print(nlist)
-n = 8
-nlist = [4, 3, 6, 8, 7, 5, 2, 1]
+# n = 8
+# target = [4, 3, 6, 8, 7, 5, 2, 1]
+# n=5
+# target = [1,2,5,3,4]
 
-zeroton = list(range(1,n+1))
-print(zeroton)
+n = int(input())
+target = list()
+for aa in range(n):
+    target.append(int(input()))
+nlist = list(range(1,n+1))
 stack = list()
-nlist_clone=list()
-answerlist = list()
+clone = list()
+pmlist = list()
 index = 0
-while True:
-    var1 = zeroton.pop(0)
-    if nlist[index] != var1:
-        stack.append(var1)
-        answerlist.append('+')
-    else:
-        stack.append(var1)
-        answerlist.append('+')
-        nlist_clone.pop()
-        answerlist.append('-')
-    index += 1
-    if(index == len(nlist)):
+while index != n:
+    if len(nlist) > 0:
+        number = nlist.pop(0)
+    if number in stack :
+        pmlist = 'NO'
         break
-print(answerlist)
+    stack.append(number)
+    pmlist.append('+')
+    while stack[-1] == target[index]:
+        popnumber = stack.pop()
+        pmlist.append('-')
+        clone.append(popnumber)
+        index += 1
+        if index ==len(target) or len(stack) == 0:
+            break
+
+if type(pmlist) == list:
+    for _ in pmlist:
+        print(_)
+else:
+    print(pmlist)
 
 

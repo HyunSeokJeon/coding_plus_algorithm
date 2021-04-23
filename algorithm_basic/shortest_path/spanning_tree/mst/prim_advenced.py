@@ -1,26 +1,5 @@
-# 프림알고리즘
+# 프림알고리즘 개선버전
 
-import heapq
-
-queue = []
-graph_data = [[2,'a'], [5, 'b'], [3,'c']]
-for edge in graph_data:
-    heapq.heappush(queue, edge)
-
-for index in range(len(queue)):
-    print(heapq.heappop(queue))
-
-print(queue)
-
-heapq.heapify(graph_data)
-for index in range(len(graph_data)):
-    print(heapq.heappop(graph_data))
-
-from collections import defaultdict
-
-list_dict = defaultdict(list)
-lise_dict = ['key1']
-print(list_dict['key1'])
 print('------------------------')
 
 edges = [
