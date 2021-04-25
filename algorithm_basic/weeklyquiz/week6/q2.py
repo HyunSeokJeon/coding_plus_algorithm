@@ -1,18 +1,28 @@
-n = 5
-number = 200
+def solution(N, number):
+    if N == number:
+        return 1
+        
+    s = [ set() for x in range(8) ] 
 
-n5, n5d = divmod(200/5, 11111)
-
-print(n5, n5d)
-
-n4, n4d = divmod(n5d, 1111)
-n3, n3d = divmod(n4d, 111)
-n2, n2d = divmod(n3d, 11)
-n1, n1d = divmod(n2d, 1)
-
-print(n4, n4d)
-print(n3, n3d)
-print(n2, n2d)
-print(n1, n1d)
+    for i,x in enumerate(s, start=1):
+        x.add( int( str(N) * i ) )
 
 
+    for i in range(1, 8):
+        for j in range(i):
+            for op1 in s[j]:
+                for op2 in s[i-j-1]:
+                    s[i].add(op1 + op2)
+                    s[i].add(op1 - op2)
+                    s[i].add(op1 * op2)
+                    if op2 != 0:
+                        s[i].add(op1 // op2)
+
+        if  number in s[i]:
+            answer = i + 1
+            break
+
+    else:
+        answer = -1
+
+    return answer
