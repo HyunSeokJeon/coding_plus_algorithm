@@ -1,28 +1,26 @@
 def solution(N, number):
     if N == number:
-        return 1
-        
-    s = [ set() for x in range(8) ] 
+        return1
+    numuset = [set() for _ in range(8)]
+    answer = 0
+    for i in range(8):
+        numuset[i].add(int(str(N) * (i+1)))
 
-    for i,x in enumerate(s, start=1):
-        x.add( int( str(N) * i ) )
-
-
-    for i in range(1, 8):
-        for j in range(i):
-            for op1 in s[j]:
-                for op2 in s[i-j-1]:
-                    s[i].add(op1 + op2)
-                    s[i].add(op1 - op2)
-                    s[i].add(op1 * op2)
-                    if op2 != 0:
-                        s[i].add(op1 // op2)
-
-        if  number in s[i]:
+    for numu in range(1, 8):
+        for i in range(numu):
+            for n1 in numuset[i]:
+                for n2 in numuset[numu - i -1]:
+                    numuset[numu].add(n1 + n2)
+                    numuset[numu].add(n1 - n2)
+                    numuset[numu].add(n1 * n2)
+                    if n2 !=0:
+                        numuset[numu].add(n1 / n2)
+    for i in range(8):
+        if number in numuset[i]:
             answer = i + 1
             break
-
-    else:
-        answer = -1
-
     return answer
+
+
+
+print(solution(2, 14))
