@@ -10,14 +10,17 @@ for _ in range(n):
         a[book] += 1
     else: 
         a[book] = 1
-b = [(cnt, book) for book, cnt in a.items()]
-b.sort(key=lambda x:x[0], reverse=True)
-candidate = b.pop(0)
-while len(b) != 0:
-    cal = b.pop(0)
-    if cal[0] == candidate[0]:
-        if candidate[1][0] > cal[1][0]:
-            candidate = cal
+b = dict()
+for book, cnt in a.items():
+    if cnt in b:
+        b[cnt].append(book)
     else:
-        break
-print(candidate[1])
+        b[cnt] = [book]
+
+maxcnt = 0
+for key in b.keys():
+    if maxcnt < key:
+        maxcnt = key
+
+b[maxcnt].sort()
+print(b[maxcnt][0])
