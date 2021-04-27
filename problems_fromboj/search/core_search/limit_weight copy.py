@@ -15,4 +15,7 @@ while minw <= maxw:
     c < minw 
 
 
+
+
+
 start, end = list(map(int, input().split()))
