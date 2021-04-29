@@ -1,10 +1,9 @@
 # 중량제한
 
-n, m = list(map(int, input().split()))
+import sys
+n, m = list(map(int, sys.stdin.readline().strip().split()))
 
-ill = {node:0 for node in range(1,n+1)}
-
-
+ill = {node:0 for node in range(1,n+1)} # islands list
 
 def pushdict(a, b, c):
     if a in edges:
@@ -18,23 +17,28 @@ def pushdict(a, b, c):
 
 edges = dict()
 for _ in range(m):
-    a, b, c = list(map(int, input().split()))
+    a, b, c = list(map(int, sys.stdin.readline().strip().split()))
     pushdict(a, b, c) 
     pushdict(b, a, c)
-    
-print(edges)
-print(ill)
-start, end = list(map(int, input().split()))
+start, end = list(map(int, sys.stdin.readline().strip().split()))
 
-result = 0
-# def bfs(start):
-#     connected = list()
-#     need_connect = list()
-#     need_connect.append(start)
-#     while need_connect:
-#         current_node = need_connect.pop(0)
-#         result = 0 
-#         if current_node not in connected:
-#             connected.append(current_node)
-#             need_connect.extend(list(edges.get(current_node).keys()))
+def bfs(start, end):
+    connected = list()
+    need_connect = list()
+    need_connect.append(start)
+    while need_connect:
+        current_node = need_connect.pop()
+        if current_node not in connected:
+            connected.append(current_node)
+            current_node_nexts = list(edges.get(current_node).keys())
+            need_connect.extend(current_node_nexts)
+            for i in current_node_nexts:
+                if edges.get(current_node).get(i) > ill[i]:
+                    ill[i] = edges.get(current_node).get(i)
+    return ill.get(end)
+                
+print(bfs(start, end))
+
+# 시간초과
+
 
