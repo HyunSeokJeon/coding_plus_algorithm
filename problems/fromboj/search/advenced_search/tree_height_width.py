@@ -64,3 +64,5 @@ for i in levellist.keys():
         max_witdh = en_index - st_index + 1
 
 print(max_index, max_witdh)
+
+# 시간 초과
