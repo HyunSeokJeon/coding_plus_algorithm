@@ -42,9 +42,9 @@ for _ in range(N):
  
 print(solution(N, duration, cost))
 
-# 5
-# 3 50
-# 1 1
-# 3 3
-# 2 2 
-# 1 1
+5
+3 50
+1 1
+3 3
+2 2 
+1 1
