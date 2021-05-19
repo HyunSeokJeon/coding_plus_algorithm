@@ -5,34 +5,21 @@ def solution(N, duration, cost):
  
     def dynamic_programming():
         max_val = 0
-        sumdp = 0
-        sumcomp = 0
+        
+        avail = list()
         for i in range(N-1, -1, -1):
-            if i+duration[i] > N:
-                continue
-            comp = dp.copy()
-            comp[i] = 1
-            for j in range(i+1, i+duration[i]):
-                comp[j] = 0
-            sumdp = 0
-            sumcomp = 0
-            for j in range(len(comp)-1):
-                sumdp += dp[j] * cost[j]
-                sumcomp += comp[j] * cost[j]
-            if sumdp <= sumcomp:
-                dp[i] = 1
-                for j in range(i+1, i+duration[i]):
-                    dp[j] = 0
-            print(comp)
+            if (i + duration[i] > N):
+                dp[i] = dp[i+1]
+            else:
+                dp[i] = max(dp[i+1], cost[i] + dp[i + duration[i]])
+                max_val = max(max_val, dp[i])
+                print(dp)
+        return max_val
     
     result = dynamic_programming()
-    sumdp = 0; 
-    for i in range(len(dp)-1):
-        sumdp += dp[i] * cost[i]
-    result = sumdp
     return result
 
-N = int(input())
+N = int(input())    
 duration = []
 cost = []
 for _ in range(N):
@@ -42,9 +29,9 @@ for _ in range(N):
  
 print(solution(N, duration, cost))
 
-5
-3 50
-1 1
-3 3
-2 2 
-1 1
+# 5
+# 3 50
+# 1 1
+# 3 3
+# 2 2 
+# 1 1

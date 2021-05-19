@@ -1,23 +1,40 @@
-# dummy 게임
+# 외벽점검
 
-def solution(N, K, L, apples, moves):
-    result = 0
-    board = list()
-    for i in range(N+2):
-        board.append([])
-        for j in range(N+2):
-            if i == 0 or i == N+1 or j == 0 or j == N+1:
-                board[i].append(1)
-            else:
-                board[i].append(0)
-    start = [1, 1]
-    print(board)
-    return result
+from itertools import permutations
 
-N = 6
-K = 3
-L = 3
-apples = [(3, 4), (2, 5), (5, 3)]
-moves = [(3, 'D'), (15, 'L'), (17, 'D')]
+def solution(n, weak, dist):
+    answer = 0
+    l = len(weak)
+    cdi = []
+    wp = weak+ [w+n for w in weak]
+    print(wp)
+    
+    for i in range(len(weak)):
+        for j in permutations(dist):
+            count = 1
+            pos = weak[i]
+            for k in j:
+                pos += k
 
-solution(N, K, L, apples, moves)
+                if pos < wp[i+l-1]:
+                    count += 1
+
+                    pos = [w for w in wp[i+1:i+l] if w > pos][0]
+                else:
+                    cdi.append(count)
+                    break
+    
+    if len(cdi) == 0 :
+        return -1
+    else:
+        return min(cdi)
+
+n = 12
+weak = [1, 5, 6, 10]
+dist = [1, 2, 3, 4]
+print(solution(n, weak, dist))
+ 
+n = 12
+weak = [1, 3, 4, 9, 10]
+dist = [3, 5, 7]
+print(solution(n, weak, dist))
